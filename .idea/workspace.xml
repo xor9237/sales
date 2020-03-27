@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf4ea7bb-3cb0-41cc-9faf-d56d5178df82" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/sales.py" beforeDir="false" afterPath="$PROJECT_DIR$/sales.py" afterDir="false" />
-    </list>
+    <list default="true" id="bf4ea7bb-3cb0-41cc-9faf-d56d5178df82" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,9 +49,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="719" />
+    <option name="x" value="438" />
     <option name="y" value="23" />
-    <option name="width" value="721" />
+    <option name="width" value="1002" />
     <option name="height" value="808" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -136,12 +134,12 @@
   <component name="ToolWindowManager">
     <frame x="719" y="23" width="721" height="808" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26142856" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26142856" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32960895" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32960895" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
