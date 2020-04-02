@@ -18,61 +18,33 @@ merged_file = pd.concat((pd.read_csv(f, sep=',') for f in all_files), ignore_ind
 merged_file.to_csv("/Users/kitaeklee/PycharmProjects/sales/merged_file.csv", index=False)
 
 
+# # # Data Cleaning: Drop the rows with missing values or categorical values
+# Drop rows with null values
+merged_file.dropna(subset=['Order ID'], inplace=True, axis=0)
+# Reassign the values to merged_file where the values of 'Order date'.str[0:2] are not 'Or'
+# to drop categorical variables
+merged_file = merged_file[merged_file['Order Date'].str[0:2] != 'Or']
 
-# # # 1. The best month for sales and how much earned in that month
-
-# Data Cleaning: Drop the rows with missing values or categorical values
-
-merged_file.dropna(subset=['Order ID'],inplace=True)
-import numpy as np
-merged_file = merged_file[merged_file['Order ID'].apply(lambda x: np.isreal(x))]
 merged_file.reset_index(inplace=True, drop=True)
 
 
-#f = 0
-
-#value = merged_file.at[f, 'Order ID']
-#for value in merged_file:
-#    if value is None:
-#        merged_file.drop(merged_file.index[f])
-#        merged_file.reset_index(inplace=True, drop=True)
-#        f+=1
-#        continue
-#    elif value == 'Order ID':
-#        merged_file.drop(merged_file.index[f])
-#        merged_file.reset_index(drop=True, inplace=True)
-#        f+=1
-#        continue
-#    elif f==186845:
-#        break
-#    else:
-#        f+=1
-#        continue
-
-#while f<186840:
-#    if f<186840:
-#        merged_file.dropna()
-#        f+=1
-#    else:
-#        break
+# add an additional column for the month of the Order Date
+merged_file['Order Month'] = merged_file['Order Date'].str[:2]
+merged_file['Order Month'] = merged_file['Order Month'].astype('int32', copy=False)
 
 
 
+# # # 1. The best month for sales and how much earned in that month
+# Best month for Sales and how much was earned that month.
+merged_file['Quantity Ordered'] = merged_file['Quantity Ordered'].astype('float64', copy=False)
+merged_file['Price Each'] = merged_file['Price Each'].astype('float64', copy=False)
+merged_file['sales'] = (merged_file['Quantity Ordered'] * merged_file['Price Each'])
 
-#print(merged_file.head())
-print(merged_file.at[253, 'Order ID'])
-print(merged_file.at[254, 'Order ID'])
-print(merged_file.at[255, 'Order ID'])
-
-# add an additional column for the month of order date
-#merged_file['Order Month'] = merged_file['Order Date'].str[:2]
-#merged_file['Order Month'] = merged_file['Order Month'].astype('int32', copy=False)
+revenue1=merged_file.groupby('Order Month'==1)['revenue'].sum()
+print(revenue1)
 
 
 
 
 
 
-# get the revenue
-#for df. in merged_file
- #   revenue = (merged_file.df['Quantity Ordered'] * merged_filed.df['Price Each'])
