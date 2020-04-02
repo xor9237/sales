@@ -35,16 +35,16 @@ merged_file['Order Month'] = merged_file['Order Month'].astype('int32', copy=Fal
 
 
 # # # 1. The best month for sales and how much earned in that month
-# Best month for Sales and how much was earned that month.
+
 merged_file['Quantity Ordered'] = merged_file['Quantity Ordered'].astype('float64', copy=False)
 merged_file['Price Each'] = merged_file['Price Each'].astype('float64', copy=False)
 merged_file['sales'] = (merged_file['Quantity Ordered'] * merged_file['Price Each'])
 
-revenue1=merged_file.groupby('Order Month'==1)['revenue'].sum()
-print(revenue1)
+# sum of 'sales', to each 'Order Month' then max value.
+best_sales = merged_file.groupby('Order Month')['sales'].sum().max()
 
-
-
-
-
+merged_file['sales_sum'] = merged_file.groupby('Order Month')['sales'].sum()
+best_sales_month = merged_file[best_sales == merged_file['sales_sum']]['Order Month']
+print(best_sales)
+print(best_sales_month)
 
