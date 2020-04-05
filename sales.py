@@ -1,3 +1,4 @@
+
 import pandas as pd
 
 # # merge 12 months of sales data into a single file
@@ -40,11 +41,28 @@ merged_file['Quantity Ordered'] = merged_file['Quantity Ordered'].astype('float6
 merged_file['Price Each'] = merged_file['Price Each'].astype('float64', copy=False)
 merged_file['sales'] = (merged_file['Quantity Ordered'] * merged_file['Price Each'])
 
-# sum of 'sales', to each 'Order Month' then max value.
+# sum of 'sales', to each 'Order Month' then max out of all.
 best_sales = merged_file.groupby('Order Month')['sales'].sum().max()
 
 merged_file['sales_sum'] = merged_file.groupby('Order Month')['sales'].sum()
-best_sales_month = merged_file[best_sales == merged_file['sales_sum']]['Order Month']
-print(best_sales)
-print(best_sales_month)
+best_sales_month = merged_file['Order Month'][best_sales == merged_file['sales_sum']]
 
+
+
+# # # Visualization
+import numpy as np
+import matplotlib.pyplot as plt
+
+month = list(range(1,13))
+plt.bar(month, merged_file['sales_sum'][1:13])
+
+plt.title('Sales of each months')
+plt.ylabel('Sales')
+plt.xlabel('Month')
+plt.xticks(np.arange(1, 12, 1))
+# use ticklabel_format to remove exponentional(scientific) notation on Y-axis
+plt.ticklabel_format(useOffset=False, style='plain')
+plt.show()
+
+
+# # # 2. Which city had the highest number of sales
