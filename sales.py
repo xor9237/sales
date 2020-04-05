@@ -66,3 +66,4 @@ plt.show()
 
 
 # # # 2. Which city had the highest number of sales
+plt.show()
