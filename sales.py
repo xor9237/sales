@@ -64,6 +64,8 @@ plt.xticks(np.arange(1, 12, 1))
 plt.ticklabel_format(useOffset=False, style='plain')
 plt.show()
 
+
+plt.
 # # # 2. Which city had the highest number of sales
 
 
