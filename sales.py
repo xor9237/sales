@@ -65,7 +65,6 @@ plt.ticklabel_format(useOffset=False, style='plain')
 plt.show()
 
 
-plt.
 # # # 2. Which city had the highest number of sales
 
 
