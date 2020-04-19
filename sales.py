@@ -62,9 +62,10 @@ plt.xlabel('Month')
 plt.xticks(np.arange(1, 12, 1))
 # use ticklabel_format to remove exponentional(scientific) notation on Y-axis
 plt.ticklabel_format(useOffset=False, style='plain')
-plt.show()
+#plt.show()
 
-plt.show()
+
 # # # 2. Which city had the highest number of sales
-
+merged_file['Purchase Address'] = merged_file[:, 'Purchase Address'].split(",")[1]
+print(merged_file['Purchase Address'].head())
 
