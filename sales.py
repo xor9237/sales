@@ -79,15 +79,15 @@ def split_state(address):
     return address.split(" ")[1]
 merged_file['state'] = merged_file['state'].apply(lambda x: split_state(x))
 
-# Create Dataframe for sum of sales that grouped by cities
-sales_sum_city = merged_file.groupby('city')['sales'].sum()
+# Create Dataframe for sum of sales that grouped by cities and states
+sales_sum_city = merged_file.groupby(['city', 'state'])['sales'].sum()
 sales_sum_city = sales_sum_city.to_frame()      # convert series into dataframe
 sales_sum_city = sales_sum_city.reset_index()
-best_sales_city = sales_sum_city[['city', 'sales']].max()
+best_sales_city = sales_sum_city[['city', 'state', 'sales']].max()
 #print(best_sales_city)
 
 
-print(merged_file['state'])
+
 
 
 
