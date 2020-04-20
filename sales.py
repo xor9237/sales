@@ -46,7 +46,7 @@ best_sales = merged_file.groupby('Order Month')['sales'].sum().max()
 
 merged_file['sales_sum'] = merged_file.groupby('Order Month')['sales'].sum()
 best_sales_month = merged_file['Order Month'][best_sales == merged_file['sales_sum']]
-
+#print(best_sales_month)
 
 
 # # # Visualization
@@ -68,12 +68,19 @@ plt.ticklabel_format(useOffset=False, style='plain')
 # # # 2. Which city had the highest number of sales
 # Create a new column for cities
 merged_file['city'] = merged_file['Purchase Address'].str.split(",")
+merged_file['city'] = merged_file['city'].str.get(1)
+# Create dataframe for sum and group by cities
+sales_sum_city = merged_file.groupby('city')['sales'].sum()
+sales_sum_city = sales_sum_city.to_frame()
 
 
-for x in range(len(merged_file['city'])):
-    merged_file.loc[x, 'city'] = merged_file.loc[x, 'city'][1]
+best_sales_city = sales_sum_city.max()
+
+#print(best_sales_city)
+print(best_sales_city)
 
 
-#print(range(len(merged_file['city'])))
-#print(merged_file.loc[1, 'city'])
+
+
+
 
