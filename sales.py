@@ -69,16 +69,13 @@ plt.ticklabel_format(useOffset=False, style='plain')
 # Create a new column for cities
 merged_file['city'] = merged_file['Purchase Address'].str.split(",")
 merged_file['city'] = merged_file['city'].str.get(1)
-# Create dataframe for sum and group by cities
+# Create Dataframe for sum that grouped by cities
 sales_sum_city = merged_file.groupby('city')['sales'].sum()
 sales_sum_city = sales_sum_city.to_frame()
-
-
-best_sales_city = sales_sum_city.max()
+sales_sum_city = sales_sum_city.reset_index()
+best_sales_city = sales_sum_city[['city', 'sales']].max()
 
 #print(best_sales_city)
-print(best_sales_city)
-
 
 
 
