@@ -35,8 +35,7 @@ merged_file['Order Month'] = merged_file['Order Date'].str[:2]
 merged_file['Order Month'] = merged_file['Order Month'].astype('int32', copy=False)
 
 
-
-
+#########################################################################
 # # # 1. The best month for sales and how much earned in that month
 
 merged_file['Quantity Ordered'] = merged_file['Quantity Ordered'].astype('float64', copy=False)
@@ -56,28 +55,29 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 month = list(range(1,13))
-plt.bar(month, merged_file['sales_sum'][1:13])
+#plt.bar(month, merged_file['sales_sum'][1:13])
 
-plt.title('Sales of each months')
-plt.ylabel('Sales')
-plt.xlabel('Month')
-plt.xticks(np.arange(1, 12, 1))
+#plt.title('Sales of each months')
+#plt.ylabel('Sales')
+#plt.xlabel('Month')
+#plt.xticks(np.arange(1, 12, 1))
 # use ticklabel_format to remove exponentional(scientific) notation on Y-axis
-plt.ticklabel_format(useOffset=False, style='plain')
+#plt.ticklabel_format(useOffset=False, style='plain')
 #plt.show()
 
 
 
-
+#########################################################################
 # # # 2. Which city had the highest number of sales
 # Create a new column for cities
 merged_file['city'] = merged_file['Purchase Address'].str.split(",")
 merged_file['city'] = merged_file['city'].str.get(1)
-# To offset the duplicates of the name of the cities, create state column
+# To deal with the duplicates of the name of the cities, create state column
 merged_file['state'] = merged_file['Purchase Address'].apply(lambda x: x.split(",")[2])
 def split_state(address):
     return address.split(" ")[1]
 merged_file['state'] = merged_file['state'].apply(lambda x: split_state(x))
+merged_file['city'] = merged_file['city'] + " " + merged_file['state']
 
 # Create Dataframe for sum of sales that grouped by cities and states
 sales_sum_city = merged_file.groupby(['city', 'state'])['sales'].sum()
@@ -87,6 +87,17 @@ best_sales_city = sales_sum_city[['city', 'state', 'sales']].max()
 #print(best_sales_city)
 
 
+# Visualize
+ax = sales_sum_city.plot(kind='bar', x='city', y='sales', color='#5cb85c',
+                         figsize=(7,7))
+ax.set_xticklabels(sales_sum_city['city'])
+ax.set_yticklabels(sales_sum_city['sales'])
+ax.set_title('Sales of each cities')
+plt.ylabel('Sales($)', fontsize=15)
+plt.xlabel('Cities', fontsize=15)
+plt.title('Sales in each cities', fontsize=15)
+plt.tight_layout()
+plt.show()
 
 
 
