@@ -19,6 +19,7 @@ merged_file = pd.concat((pd.read_csv(f, sep=',') for f in all_files), ignore_ind
 merged_file.to_csv("/Users/kitaeklee/PycharmProjects/sales/merged_file.csv", index=False)
 
 
+
 # # # Data Cleaning: Drop the rows with missing values or categorical values
 # Drop rows with null values
 merged_file.dropna(subset=['Order ID'], inplace=True, axis=0)
@@ -32,6 +33,7 @@ merged_file.reset_index(inplace=True, drop=True)
 # add an additional column for the month of the Order Date
 merged_file['Order Month'] = merged_file['Order Date'].str[:2]
 merged_file['Order Month'] = merged_file['Order Month'].astype('int32', copy=False)
+
 
 
 
@@ -65,18 +67,27 @@ plt.ticklabel_format(useOffset=False, style='plain')
 #plt.show()
 
 
+
+
 # # # 2. Which city had the highest number of sales
 # Create a new column for cities
 merged_file['city'] = merged_file['Purchase Address'].str.split(",")
 merged_file['city'] = merged_file['city'].str.get(1)
-# Create Dataframe for sum that grouped by cities
+# To offset the duplicates of the name of the cities, create state column
+merged_file['state'] = merged_file['Purchase Address'].apply(lambda x: x.split(",")[2])
+def split_state(address):
+    return address.split(" ")[1]
+merged_file['state'] = merged_file['state'].apply(lambda x: split_state(x))
+
+# Create Dataframe for sum of sales that grouped by cities
 sales_sum_city = merged_file.groupby('city')['sales'].sum()
-sales_sum_city = sales_sum_city.to_frame()
+sales_sum_city = sales_sum_city.to_frame()      # convert series into dataframe
 sales_sum_city = sales_sum_city.reset_index()
 best_sales_city = sales_sum_city[['city', 'sales']].max()
-
 #print(best_sales_city)
 
+
+print(merged_file['state'])
 
 
 
