@@ -68,12 +68,12 @@ plt.ticklabel_format(useOffset=False, style='plain')
 # # # 2. Which city had the highest number of sales
 # Create a new column for cities
 merged_file['city'] = merged_file['Purchase Address'].str.split(",")
-x = 0
+
+
 for x in range(len(merged_file['city'])):
-    merged_file['city'] = merged_file.ix[x, 'city'][1]
-    x+=1
-    continue
+    merged_file.loc[x, 'city'] = merged_file.loc[x, 'city'][1]
 
 
-print(merged_file['city'].head())
+#print(range(len(merged_file['city'])))
+#print(merged_file.loc[1, 'city'])
 
