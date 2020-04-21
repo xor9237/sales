@@ -83,13 +83,12 @@ merged_file['city'] = merged_file['city'] + " " + merged_file['state']
 sales_sum_city = merged_file.groupby(['city', 'state'])['sales'].sum()
 sales_sum_city = sales_sum_city.to_frame()      # convert series into dataframe
 sales_sum_city = sales_sum_city.reset_index()
-best_sales_city = sales_sum_city[['city', 'state', 'sales']].max()
-#print(best_sales_city)
-
+sales_sum_city['sales'] = sales_sum_city['sales'].astype('str')
+sales_sum_city['sales'] = sales_sum_city['sales'].apply(lambda x: x.split(".")[0])
+sales_sum_city['sales'] = sales_sum_city['sales'].astype('float')
 
 # Visualize
-ax = sales_sum_city.plot(kind='bar', x='city', y='sales', color='#5cb85c',
-                         figsize=(7,7))
+ax = sales_sum_city.plot(kind='bar', x='city', y='sales', color='#5cb85c', figsize=(7,7))
 ax.set_xticklabels(sales_sum_city['city'])
 ax.set_yticklabels(sales_sum_city['sales'])
 ax.set_title('Sales of each cities')
@@ -97,9 +96,20 @@ plt.ylabel('Sales($)', fontsize=15)
 plt.xlabel('Cities', fontsize=15)
 plt.title('Sales in each cities', fontsize=15)
 plt.tight_layout()
+#plt.show()
+
+
+#########################################################################
+# # # 3. What time should we display advertisements to maximize likelihood of customers' buying product?
+
+merged_file['Order Date'] = pd.to_datetime(merged_file['Order Date'])
+merged_file['Hour'] = merged_file['Order Date'].dt.hour
+merged_file['Minute'] = merged_file['Order Date'].dt.minute
+
+ax = merged_file.plot(kind='line', x='Hour', y='sales')
+ax.set_xticklabels(merged_file['Hour'])
+ax.set_yticklabels(merged_file['sales'])
 plt.show()
-
-
 
 
 
