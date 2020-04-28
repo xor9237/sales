@@ -106,10 +106,10 @@ merged_file['Order Date'] = pd.to_datetime(merged_file['Order Date'])
 merged_file['Hour'] = merged_file['Order Date'].dt.hour
 merged_file['Minute'] = merged_file['Order Date'].dt.minute
 
+
 ax = merged_file.plot(kind='line', x='Hour', y='sales')
 ax.set_xticklabels(merged_file['Hour'])
 ax.set_yticklabels(merged_file['sales'])
 plt.show()
-
 
 
