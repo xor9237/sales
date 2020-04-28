@@ -88,14 +88,14 @@ sales_sum_city['sales'] = sales_sum_city['sales'].apply(lambda x: x.split(".")[0
 sales_sum_city['sales'] = sales_sum_city['sales'].astype('float')
 
 # Visualize
-ax = sales_sum_city.plot(kind='bar', x='city', y='sales', color='#5cb85c', figsize=(7,7))
-ax.set_xticklabels(sales_sum_city['city'])
-ax.set_yticklabels(sales_sum_city['sales'])
-ax.set_title('Sales of each cities')
-plt.ylabel('Sales($)', fontsize=15)
-plt.xlabel('Cities', fontsize=15)
-plt.title('Sales in each cities', fontsize=15)
-plt.tight_layout()
+#ax = sales_sum_city.plot(kind='bar', x='city', y='sales', color='#5cb85c', figsize=(7,7))
+#ax.set_xticklabels(sales_sum_city['city'])
+#ax.set_yticklabels(sales_sum_city['sales'])
+#ax.set_title('Sales of each cities')
+#plt.ylabel('Sales($)', fontsize=15)
+#plt.xlabel('Cities', fontsize=15)
+#plt.title('Sales in each cities', fontsize=15)
+#plt.tight_layout()
 #plt.show()
 
 
@@ -106,13 +106,17 @@ merged_file['Order Date'] = pd.to_datetime(merged_file['Order Date'])
 merged_file['Hour'] = merged_file['Order Date'].dt.hour
 merged_file['Minute'] = merged_file['Order Date'].dt.minute
 
-sales_sum_hour = merged_file['sales'].groupby(merged_file['Hour']).sum()
+sales_sum_hour = merged_file['sales'].groupby(merged_file['Hour']).sum().round(0)
 sales_sum_hour = sales_sum_hour.to_frame()
 sales_sum_hour = sales_sum_hour.reset_index(inplace=False)
-sales_sum_hour['Hour'] = list(map(str, range(1,25)))
-#ax = merged_file.plot(kind='line', x='Hour', y='sales')
-#ax.set_xticklabels(list(map(str, range(1,25)))
-#ax.set_yticklabels(merged_file['sales'])
-#plt.show()
-print(sales_sum_hour)
+sales_sum_hour['Hour'] = list(map(int, range(1,25)))
+sales_sum_hour['sales'] = sales_sum_hour['sales'].astype('float')
+
+ax = sales_sum_hour.plot(kind='line', x='Hour', y='sales')
+ax.set_xticks(sales_sum_hour['Hour'])
+ax.set_yticks(list(map(float, range(150000, 2500000, 200000))))
+plt.tight_layout()
+plt.ticklabel_format(useOffset=False, style='plain')
+
+plt.show()
 
