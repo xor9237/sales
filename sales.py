@@ -115,8 +115,16 @@ sales_sum_hour['sales'] = sales_sum_hour['sales'].astype('float')
 ax = sales_sum_hour.plot(kind='line', x='Hour', y='sales')
 ax.set_xticks(sales_sum_hour['Hour'])
 ax.set_yticks(list(map(float, range(150000, 2500000, 200000))))
+plt.ylabel('Sales in $')
 plt.tight_layout()
 plt.ticklabel_format(useOffset=False, style='plain')
+plt.grid()
+#plt.show()
 
-plt.show()
 
+#########################################################################
+# # # 4. What products are the most often sold together?
+# bought on Same order ID == sold together
+
+date_product = merged_file.loc[:, ['Order Date', 'Product']]
+print(new.head())
