@@ -127,4 +127,7 @@ plt.grid()
 # bought on Same order ID == sold together
 
 date_product = merged_file.loc[:, ['Order Date', 'Product']]
+
+date_product = merged_file.loc[:, ['Order ID', 'Product']]
+new=date_product.groupby('Order ID')['Product'].aggregate(['sum'])
 print(new.head())
