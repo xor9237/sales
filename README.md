@@ -129,4 +129,34 @@ plt.show()
 ```
 ![](image_sales/3.bargraph_no2.png)
 
+***3. What time should we display advertisements to maximize likelihood of customers' buying product?***
+```
+# Create new columns for date, hours and minutes
+merged_file['Order Date'] = pd.to_datetime(merged_file['Order Date'])
+merged_file['Hour'] = merged_file['Order Date'].dt.hour
+merged_file['Minute'] = merged_file['Order Date'].dt.minute
+```
+- Create a new Dataframe only with hours and sales
+```
+# Create a new Dataframe only with Hour and Sales
+sales_sum_hour = merged_file['sales'].groupby(merged_file['Hour']).sum().round(0)
+sales_sum_hour = sales_sum_hour.to_frame()
+sales_sum_hour = sales_sum_hour.reset_index(inplace=False)
+sales_sum_hour['Hour'] = list(map(int, range(1,25)))
+sales_sum_hour['sales'] = sales_sum_hour['sales'].astype('float')
+```
+- Visualize using Line Plot
+```
+# Visualize using Line Plot
+
+ax = sales_sum_hour.plot(kind='line', x='Hour', y='sales')
+ax.set_xticks(sales_sum_hour['Hour'])
+ax.set_yticks(list(map(float, range(150000, 2500000, 200000))))
+plt.ylabel('Sales in $')
+plt.tight_layout()
+plt.ticklabel_format(useOffset=False, style='plain')
+plt.grid()
+plt.show()
+```
+![](image_sales/4.lineplot_for_no3.png)
 
