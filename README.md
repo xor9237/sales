@@ -26,5 +26,5 @@ merged_file = pd.concat((pd.read_csv(f, sep=',') for f in all_files), ignore_ind
 # export as CSV to the local directory
 merged_file.to_csv("/Users/kitaeklee/PycharmProjects/sales/merged_file.csv", index=False)
 ```
-
-```
+Imported and merged file looks like below:
+![](image_sales/1.imported_data.png)
