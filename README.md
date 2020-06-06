@@ -158,5 +158,5 @@ plt.ticklabel_format(useOffset=False, style='plain')
 plt.grid()
 plt.show()
 ```
-![](image_sales/4.lineplot_for_no3.png)
+![](image_sales/4.Lineplot_for_no3.png)
 
