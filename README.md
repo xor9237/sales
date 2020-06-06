@@ -85,3 +85,48 @@ plt.ylabel('Sales')
 plt.title('Total sales in each month')
 ```
 ![](image_sales/2.bargraph_no1.png)
+
+***2. Which city has the highest and the lowest sales?***
+
+- Create a new Dataframe
+```
+# Create a new column for cities
+merged_file['city'] = merged_file['Purchase Address'].str.split(",")
+merged_file['city'] = merged_file['city'].str.get(1)
+
+# To deal with the duplicates of the name of the cities, create state column
+merged_file['state'] = merged_file['Purchase Address'].apply(lambda x: x.split(",")[2])
+def split_state(address):
+    return address.split(" ")[1]
+merged_file['state'] = merged_file['state'].apply(lambda x: split_state(x))
+merged_file['city'] = merged_file['city'] + " " + merged_file['state']
+```
+```
+# Create Dataframe for sum of sales that grouped by cities and states
+sales_sum_city = merged_file.groupby(['city', 'state'])['sales'].sum()
+sales_sum_city = sales_sum_city.to_frame()      # convert series into dataframe
+sales_sum_city = sales_sum_city.reset_index()
+sales_sum_city['sales'] = sales_sum_city['sales'].astype('str')
+sales_sum_city['sales'] = sales_sum_city['sales'].apply(lambda x: x.split(".")[0])
+sales_sum_city['sales'] = sales_sum_city['sales'].astype('float')
+```
+
+- Plot the Dataframe
+```
+# Visualize
+
+colors = list('rkkkkkkkkb')
+ax = sales_sum_city.plot(kind='bar', x='city', y='sales', 
+                         color=colors, figsize=(7,7), legend=None)
+ax.set_xticklabels(sales_sum_city['city'])
+ax.set_yticklabels(sales_sum_city['sales'])
+ax.set_title('Sales of each cities')
+plt.ylabel('Sales($)', fontsize=15)
+plt.xlabel('Cities', fontsize=15)
+plt.title('Sales in each cities', fontsize=15)
+plt.tight_layout()
+plt.show()
+```
+![](image_sales/3.bargraph_no2.png)
+
+
