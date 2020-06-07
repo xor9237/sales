@@ -160,3 +160,24 @@ plt.show()
 ```
 ![](image_sales/4.Lineplot_for_no3.png)
 
+***4. What products are the most often sold together?***
+By doing 
+```
+merged_file['Order ID'].nunique()
+```
+I could find that there are 178437 unique values while there are 185950 rows. Products are bought together if the sold products have the same Order ID.
+
+- Create a new Dataframe only with 'Order ID' and 'Product'
+```
+id_product = merged_file.loc[:, ['Order Date', 'Product']]
+id_product = merged_file.loc[:, ['Order ID', 'Product']]
+```
+- Create a new Dataframe with the 'Order ID' that have duplicates
+```
+id_duplicates = id_product[id_product['Order ID'].duplicated(keep=False)]
+id_duplicates.sort_values(ascending=False, by='Order ID')
+```
+Then it returns the dataframe with only the values that have duplicated 'Order ID' for example,
+![](image_sales/5.duplicate_df_no4.png)
+
+
