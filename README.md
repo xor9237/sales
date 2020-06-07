@@ -182,4 +182,8 @@ id_duplicates = id_duplicates.drop(columns='index')
 Then it returns the dataframe with only the values that have duplicated 'Order ID' for example,
 ![](image_sales/5.duplicate_df_no4.png)
 
+***4. What products are the most often sold together?***
+Apriori Algorithm
+Apriori library requires our dataset to be in the form of a list of lists, where the whole dataset is a big list and each transaction in the dataset is an inner list within the outer big list. 
+Currently we have data in the form of a pandas dataframe. To convert our pandas dataframe into a list of lists, execute the following script:
 
