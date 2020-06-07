@@ -176,6 +176,8 @@ id_product = merged_file.loc[:, ['Order ID', 'Product']]
 ```
 id_duplicates = id_product[id_product['Order ID'].duplicated(keep=False)]
 id_duplicates.sort_values(ascending=False, by='Order ID')
+id_duplicates.reset_index(inplace=True)
+id_duplicates = id_duplicates.drop(columns='index')
 ```
 Then it returns the dataframe with only the values that have duplicated 'Order ID' for example,
 ![](image_sales/5.duplicate_df_no4.png)
