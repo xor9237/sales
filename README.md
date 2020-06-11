@@ -187,3 +187,4 @@ Apriori Algorithm
 Apriori library requires our dataset to be in the form of a list of lists, where the whole dataset is a big list and each transaction in the dataset is an inner list within the outer big list. 
 Currently we have data in the form of a pandas dataframe. To convert our pandas dataframe into a list of lists, execute the following script:
 
+ 
