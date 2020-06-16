@@ -166,6 +166,7 @@ plt.show()
 ![](image_sales/4.Lineplot_for_no3.png)
 
 ***4. What products are the most often sold together?***
+
 By doing 
 ```
 merged_file['Order ID'].nunique()
@@ -223,4 +224,5 @@ Based on the Dataframe, products that were bought together are:
 2. Phone and Headphone
 3. AA batteries and AAA batteries
 
+***5. What products were sold the most and why?***
 
