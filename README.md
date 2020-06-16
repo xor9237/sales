@@ -1,6 +1,6 @@
 # Sales Analysis
 
-***Installation***
+***Installation and Import***
 ```
 import pandas as pd
 
@@ -10,6 +10,11 @@ import matplotlib.pyplot as plt
 # # To merge 12 months of sales data into a single file
 import os
 import glob
+
+# for association analysis
+pip install mlxtend
+from mlxtend.frequent_patterns import apriori
+from mlxtend.frequent_patterns import association_rules
 ```
 
 ***Import then merge the dataset***
@@ -183,8 +188,25 @@ Then it returns the dataframe with only the values that have duplicated 'Order I
 ![](image_sales/5.duplicate_df_no4.png)
 
 ***4. What products are the most often sold together?***
-Apriori Algorithm
-Apriori library requires our dataset to be in the form of a list of lists, where the whole dataset is a big list and each transaction in the dataset is an inner list within the outer big list. 
-Currently we have data in the form of a pandas dataframe. To convert our pandas dataframe into a list of lists, execute the following script:
+I did Association Analysis by using Apriori Algorithm and Association Rules.
+
+- I extracted only necessary columns from the merged_file since products are bought together if Order ID is same. Then extract the values with duplicates in Order ID.
+```
+# bought on Same order ID == sold together
+
+id_product = merged_file.loc[:, ['Order Date', 'Product']]
+id_product = merged_file.loc[:, ['Order ID', 'Product']]
+
+# Create a new Dataframe with the 'Order ID' that have duplicates
+id_duplicates = id_product[id_product['Order ID'].duplicated(keep=False)]
+id_duplicates.sort_values(ascending=False, by='Order ID')
+id_duplicates.reset_index(inplace=True)
+id_duplicates = id_duplicates.drop(columns='index')
+```
+First 5 rows of the new Data
+
+- To get the 
+
+
 
  
