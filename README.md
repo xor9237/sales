@@ -213,10 +213,15 @@ rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1)
 ![](image_sales/7.rules_no4.png)
 
 - From the Association Analysis, ***Confidence*** refers to the likelihood that two items are bought together.
-Top 5 products that were bought together are:
 ```
 rules.loc[:, ['antecedents', 'consequents', 'confidence']].sort_values(by='confidence', ascending=False).reset_index().drop(columns='index')
 ```
-![](image_sales/8.rules_confidence_no4.png)
+![](image_sales/8.rules_confidence_no4_.png)
 
+Based on the Dataframe, products that were bought together are:
+1. Vareebadd Phone and USB-C Charging Cable
+2. Google Phone and	USB-C Charging Cable
+3. Lightning Charging Cable and	iPhone
+4. iPhone	and Lightning Charging Cable
+5. USB-C Charging Cable and Google Phone
 
