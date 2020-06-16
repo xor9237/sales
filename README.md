@@ -219,9 +219,8 @@ rules.loc[:, ['antecedents', 'consequents', 'confidence']].sort_values(by='confi
 ![](image_sales/8.rules_confidence_no4_.png)
 
 Based on the Dataframe, products that were bought together are:
-1. Vareebadd Phone and USB-C Charging Cable
-2. Google Phone and	USB-C Charging Cable
-3. Lightning Charging Cable and	iPhone
-4. iPhone	and Lightning Charging Cable
-5. USB-C Charging Cable and Google Phone
+1. Phone and Charging Cable
+2. Phone and Headphone
+3. AA batteries and AAA batteries
+
 
