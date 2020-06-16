@@ -213,6 +213,7 @@ rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1)
 ![](image_sales/7.rules_no4.png)
 
 - From the Association Analysis, ***Confidence*** refers to the likelihood that two items are bought together.
+Top 5 products that were bought together are:
 ```
 rules.loc[:, ['antecedents', 'consequents', 'confidence']].sort_values(by='confidence', ascending=False).reset_index().drop(columns='index')
 ```
