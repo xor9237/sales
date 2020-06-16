@@ -193,7 +193,29 @@ Then it returns the dataframe with only the values that have duplicated 'Order I
 # One hot encoding
 df_grouped = id_duplicates.groupby(['Order ID','Product'])['Product'].count().unstack().fillna(0).reset_index().set_index('Order ID')
 ```
+First 5 rows of one hot encoded dataframe:
 ![](image_sales/6.onehotencoding_no4.png)
 
+- Replace 2.0 to 1.0 to run the analysis and since I'm only trying to find what products are bought together.
+```
+for i in range(0, 7136):
+    for j in range(0, 19):
+        if df_grouped.values[i,j] == 2.0:
+            df_grouped.values[i,j] = 1.0
+```
 
- 
+- Run Apriori Method and Association Rules
+```
+frequent_itemsets = apriori(df_grouped, min_support=0.01, use_colnames=True)
+
+rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1)
+```
+![](image_sales/7.rules_no4.png)
+
+- From the Association Analysis, ***Confidence*** refers to the likelihood that two items are bought together.
+```
+rules.loc[:, ['antecedents', 'consequents', 'confidence']].sort_values(by='confidence', ascending=False).reset_index().drop(columns='index')
+```
+![](image_sales/8.rules_confidence_no4.png)
+
+
