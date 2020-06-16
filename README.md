@@ -184,29 +184,16 @@ id_duplicates.sort_values(ascending=False, by='Order ID')
 id_duplicates.reset_index(inplace=True)
 id_duplicates = id_duplicates.drop(columns='index')
 ```
-Then it returns the dataframe with only the values that have duplicated 'Order ID' for example,
-![](image_sales/5.duplicate_df_no4.png)
+Then it returns the dataframe with only the values that have duplicated 'Order ID' for example the first 5 rows of the new dataframe is:
+![](image_sales/5.duplicate_df_no4_.png)
 
-***4. What products are the most often sold together?***
-I did Association Analysis by using Apriori Algorithm and Association Rules.
 
-- I extracted only necessary columns from the merged_file since products are bought together if Order ID is same. Then extract the values with duplicates in Order ID.
+- One Hot Encoding
 ```
-# bought on Same order ID == sold together
-
-id_product = merged_file.loc[:, ['Order Date', 'Product']]
-id_product = merged_file.loc[:, ['Order ID', 'Product']]
-
-# Create a new Dataframe with the 'Order ID' that have duplicates
-id_duplicates = id_product[id_product['Order ID'].duplicated(keep=False)]
-id_duplicates.sort_values(ascending=False, by='Order ID')
-id_duplicates.reset_index(inplace=True)
-id_duplicates = id_duplicates.drop(columns='index')
+# One hot encoding
+df_grouped = id_duplicates.groupby(['Order ID','Product'])['Product'].count().unstack().fillna(0).reset_index().set_index('Order ID')
 ```
-First 5 rows of the new Data
-
-- To get the 
-
+![](image_sales/6.onehotencoding_no4.png)
 
 
  
