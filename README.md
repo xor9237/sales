@@ -225,4 +225,30 @@ Based on the Dataframe, products that were bought together are:
 3. AA batteries and AAA batteries
 
 ***5. What products were sold the most and why?***
+```
+# get the dataframe with total quantity ordered and group by products
+merged_sum = merged_file.loc[:, ['Quantity Ordered', 'Product']]
+merged_sum = merged_sum.groupby('Product').sum().sort_values(ascending=False, by='Quantity Ordered').reset_index()
 
+# second dataframe with products and prices
+merged_sum2 = merged_file.loc[:, ['Product','Price Each']].drop_duplicates().reset_index()
+
+# merge two dataframes for better result of merged plots
+merged_sum12 = merged_sum.merge(merged_sum2, how='inner')
+```
+```
+# # # Visualization
+fig, ax1 = plt.subplots()
+# create a twin Axes sharing the xaxis
+ax2 = ax1.twinx()
+
+
+ax1.bar(merged_sum12['Product'], merged_sum12['Quantity Ordered'])
+ax1.set_xlabel('Products')
+ax1.set_ylabel('Total Quantity Ordered', color='blue')
+ax1.set_xticklabels(merged_sum12['Product'], rotation='vertical', size=8)
+
+ax2.plot(merged_sum12['Product'], merged_sum12['Price Each'], color='orange')
+ax2.set_ylabel('Price($)', color='orange')
+```
+![](image_sales/9.plot_no5.png)
