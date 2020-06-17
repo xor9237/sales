@@ -252,7 +252,6 @@ ax2.plot(merged_sum12['Product'], merged_sum12['Price Each'], color='orange')
 ax2.set_ylabel('Price($)', color='orange')
 ```
 ![](image_sales/9.plot_no5.png)
--->
 
 People are more likely to spend well on products with low prices and products with short life. 
 People don't need batteries often but they tend to purchase and stock up at home since it's cheap. Charging cables and earphones have relatively short lives, necessary and are cheap so people have almost no hesitancy to buy them. 
